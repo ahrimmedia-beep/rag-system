@@ -13,9 +13,7 @@ def ingest(
     service: IngestionService = Depends(get_ingestion_service),
 ) -> IngestResponse:
     metadata: dict[str, object] = {"source": body.source}
-    if body.lesson is not None:
-        metadata["lesson"] = body.lesson
-    if body.timecode is not None:
-        metadata["timecode"] = body.timecode
+    if body.section is not None:
+        metadata["section"] = body.section
     n = service.ingest(body.text, metadata)
     return IngestResponse(ingested_chunks=n, source=body.source)

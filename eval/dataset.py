@@ -2,21 +2,30 @@
 # document ids considered relevant. Kept tiny and deterministic for reproducible eval.
 DOCUMENTS: list[dict[str, str]] = [
     {
-        "id": "vpn",
-        "text": "To connect to the course VPN, install the client and use the lesson-3 token.",
+        "id": "usdt",
+        "text": (
+            "To withdraw USDT on the TRC20 network the fee is 1 USDT and it is processed "
+            "within 5 minutes; the ERC20 network costs more because of Ethereum gas."
+        ),
     },
     {
-        "id": "ide",
-        "text": "Set up the IDE in lesson 2: install the extension pack and open the workspace.",
+        "id": "kyc",
+        "text": (
+            "Without identity verification the daily withdrawal limit is 2 BTC; completing "
+            "KYC (passport and a selfie) raises the daily limit to 100 BTC."
+        ),
     },
     {
-        "id": "deadline",
-        "text": "Homework for module 1 is due at the end of week two; submit via the portal.",
+        "id": "fees",
+        "text": (
+            "Spot trading fees are 0.1% for makers and 0.1% for takers; holding the exchange "
+            "native token lowers the taker fee to 0.075%."
+        ),
     },
 ]
 
 QUERIES: list[dict[str, object]] = [
-    {"question": "how do I connect to the vpn?", "relevant": {"vpn"}},
-    {"question": "where do I set up my editor?", "relevant": {"ide"}},
-    {"question": "when is the first homework due?", "relevant": {"deadline"}},
+    {"question": "how do I withdraw usdt cheaply?", "relevant": {"usdt"}},
+    {"question": "what is the withdrawal limit without verification?", "relevant": {"kyc"}},
+    {"question": "what is the maker fee?", "relevant": {"fees"}},
 ]

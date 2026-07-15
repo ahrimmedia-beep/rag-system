@@ -14,7 +14,9 @@ def _store_with(*chunks: Chunk) -> FakeVectorStore:
 
 
 def test_agent_calls_tool_then_answers_grounded():
-    store = _store_with(Chunk(id="1", text="aaaa answer here", metadata={"lesson": "L1"}))
+    store = _store_with(
+        Chunk(id="1", text="aaaa answer here", metadata={"section": "Withdrawing USDT"})
+    )
     retrieval = RetrievalService(FakeEmbeddings(), store, top_k=1)
     # call 1 (agent): decides to search -> tool call; call 2 (generation): final answer
     llm = FakeLLM(
@@ -25,15 +27,15 @@ def test_agent_calls_tool_then_answers_grounded():
                     ToolCall(id="t1", name="search_knowledge_base", arguments={"query": "aaaa"})
                 ],
             ),
-            LLMResult(content="Grounded answer (L1).", tool_calls=[]),
+            LLMResult(content="Grounded answer (Withdrawing USDT).", tool_calls=[]),
         ]
     )
     generation = GenerationService(llm)
     memory = MemoryService(window=20)
     agent = RagAgentService(llm, retrieval, generation, memory)
     ans = agent.answer("s1", "how?")
-    assert ans.answer == "Grounded answer (L1)."
-    assert ans.sources and ans.sources[0].lesson == "L1"
+    assert ans.answer == "Grounded answer (Withdrawing USDT)."
+    assert ans.sources and ans.sources[0].section == "Withdrawing USDT"
     assert len(memory.get("s1")) == 2
 
 

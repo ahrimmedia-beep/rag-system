@@ -4,8 +4,7 @@ from pydantic import BaseModel, Field
 class IngestRequest(BaseModel):
     text: str = Field(min_length=1)
     source: str
-    lesson: str | None = None
-    timecode: str | None = None
+    section: str | None = None
 
 
 class IngestResponse(BaseModel):
@@ -20,8 +19,7 @@ class AskRequest(BaseModel):
 
 class SourceModel(BaseModel):
     source: str
-    lesson: str | None = None
-    timecode: str | None = None
+    section: str | None = None
     score: float
 
 

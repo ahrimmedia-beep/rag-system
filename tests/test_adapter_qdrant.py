@@ -24,9 +24,11 @@ class _FakeQdrant:
     def query_points(
         self, collection_name: str, query, limit, query_filter=None, with_payload=True
     ):
-        points = [SimpleNamespace(id="1", score=0.9, payload={"text": "hello", "lesson": "L1"})][
-            :limit
-        ]
+        points = [
+            SimpleNamespace(
+                id="1", score=0.9, payload={"text": "hello", "section": "Withdrawing USDT"}
+            )
+        ][:limit]
         return SimpleNamespace(points=points)
 
     def get_collections(self) -> object:
@@ -59,11 +61,14 @@ def test_qdrant_upsert_and_search_roundtrip():
     store = QdrantVectorStore("http://x", "kb", client=client)
     store.ensure_collection(3)
     assert client.created == "kb"
-    store.upsert([Chunk(id="1", text="hello", metadata={"lesson": "L1"})], [[1.0, 0.0, 0.0]])
+    store.upsert(
+        [Chunk(id="1", text="hello", metadata={"section": "Withdrawing USDT"})],
+        [[1.0, 0.0, 0.0]],
+    )
     assert client.points and client.points[0].payload["text"] == "hello"
     hits = store.search([1.0, 0.0, 0.0], top_k=1)
     assert hits[0].chunk.text == "hello"
-    assert hits[0].chunk.metadata["lesson"] == "L1"
+    assert hits[0].chunk.metadata["section"] == "Withdrawing USDT"
     assert "text" not in hits[0].chunk.metadata
 
 

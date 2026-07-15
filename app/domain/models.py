@@ -17,8 +17,7 @@ class RetrievedChunk:
 @dataclass
 class Source:
     source: str
-    lesson: str | None
-    timecode: str | None
+    section: str | None
     score: float
 
 

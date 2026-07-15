@@ -15,7 +15,7 @@ class _StubIngestion:
 
 class _StubAgent:
     def answer(self, session_id: str, question: str) -> Answer:
-        return Answer(answer="grounded", sources=[Source("l1.txt", "Lesson 1", "12:34", 0.9)])
+        return Answer(answer="grounded", sources=[Source("Withdrawing USDT", "TRC20 network", 0.9)])
 
 
 class _StubAgentUnavailable:
@@ -62,7 +62,7 @@ def test_ask_endpoint_returns_answer_and_sources():
     assert r.status_code == 200
     body = r.json()
     assert body["answer"] == "grounded"
-    assert body["sources"][0]["lesson"] == "Lesson 1"
+    assert body["sources"][0]["section"] == "TRC20 network"
 
 
 def test_ask_validation_error_on_empty_question():

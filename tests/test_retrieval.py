@@ -22,11 +22,11 @@ def test_retrieve_returns_top_k():
 
 def test_retrieve_applies_metadata_filter():
     store = _store_with(
-        Chunk(id="1", text="aaaa", metadata={"lesson": "L1"}),
-        Chunk(id="2", text="aaaa", metadata={"lesson": "L2"}),
+        Chunk(id="1", text="aaaa", metadata={"section": "Deposits"}),
+        Chunk(id="2", text="aaaa", metadata={"section": "Withdrawals"}),
     )
     svc = RetrievalService(FakeEmbeddings(), store, top_k=5)
-    hits = svc.retrieve("aaaa", metadata_filter={"lesson": "L2"})
+    hits = svc.retrieve("aaaa", metadata_filter={"section": "Withdrawals"})
     assert [h.chunk.id for h in hits] == ["2"]
 
 

@@ -16,7 +16,7 @@ def ask(
     return AskResponse(
         answer=answer.answer,
         sources=[
-            SourceModel(source=s.source, lesson=s.lesson, timecode=s.timecode, score=s.score)
+            SourceModel(source=s.source, section=s.section, score=s.score)
             for s in answer.sources
         ],
     )

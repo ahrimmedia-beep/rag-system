@@ -7,11 +7,11 @@ def test_ingest_splits_embeds_and_upserts():
     svc = IngestionService(
         FakeEmbeddings(), store, embeddings_dim=3, chunk_size=20, chunk_overlap=5
     )
-    n = svc.ingest("word " * 40, {"source": "lesson1.txt", "lesson": "Lesson 1"})
+    n = svc.ingest("word " * 40, {"source": "Withdrawing USDT", "section": "TRC20 network"})
     assert n > 1
     hits = store.search(FakeEmbeddings().embed_query("word"), top_k=100)
     assert len(hits) == n
-    assert hits[0].chunk.metadata["source"] == "lesson1.txt"
+    assert hits[0].chunk.metadata["source"] == "Withdrawing USDT"
     assert "chunk_index" in hits[0].chunk.metadata
 
 

@@ -1,6 +1,6 @@
 from app.domain.llm import LLMProvider
 from app.domain.models import Answer, Message, RetrievedChunk, Source
-from app.prompts.curator import FALLBACK, SYSTEM_PROMPT
+from app.prompts.support import FALLBACK, SYSTEM_PROMPT
 
 
 class GenerationService:
@@ -35,9 +35,8 @@ class GenerationService:
         blocks = []
         for r in retrieved:
             md = r.chunk.metadata
-            label = str(md.get("lesson") or md.get("source") or "source")
-            tc = md.get("timecode")
-            header = f"[{label}{', ' + str(tc) if tc else ''}]"
+            label = str(md.get("section") or md.get("source") or "source")
+            header = f"[{label}]"
             blocks.append(f"{header}\n{r.chunk.text}")
         return "\n\n".join(blocks)
 
@@ -46,9 +45,8 @@ class GenerationService:
         return [
             Source(
                 source=str(r.chunk.metadata.get("source", "unknown")),
-                lesson=(str(r.chunk.metadata["lesson"]) if "lesson" in r.chunk.metadata else None),
-                timecode=(
-                    str(r.chunk.metadata["timecode"]) if "timecode" in r.chunk.metadata else None
+                section=(
+                    str(r.chunk.metadata["section"]) if "section" in r.chunk.metadata else None
                 ),
                 score=r.score,
             )

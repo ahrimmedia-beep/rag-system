@@ -34,10 +34,10 @@ Ingest and ask:
 
 ```bash
 curl -X POST localhost:8000/ingest -H 'content-type: application/json' \
-  -d '{"text":"To connect to the VPN, use the lesson-3 token.","source":"lesson3.md","lesson":"Lesson 3"}'
+  -d '{"text":"To withdraw USDT on TRC20 the fee is 1 USDT.","source":"Withdrawing USDT","section":"TRC20 network"}'
 
 curl -X POST localhost:8000/ask -H 'content-type: application/json' \
-  -d '{"session_id":"s1","question":"how do I connect to the vpn?"}'
+  -d '{"session_id":"s1","question":"how do I withdraw usdt?"}'
 ```
 
 ## Develop

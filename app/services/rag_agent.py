@@ -5,16 +5,19 @@ from app.services.memory import MemoryService
 from app.services.retrieval import RetrievalService
 
 AGENT_PROMPT = (
-    "You are an AI course curator. When a question needs course material, call the "
-    "`search_knowledge_base` tool with a focused query. For pure greetings or small talk, "
-    "answer directly without the tool."
+    "You are a support assistant for a cryptocurrency exchange. When a question needs "
+    "help-center information, call the `search_knowledge_base` tool with a focused query. "
+    "For pure greetings or small talk, answer directly without the tool."
 )
 
 SEARCH_TOOL: dict[str, object] = {
     "type": "function",
     "function": {
         "name": "search_knowledge_base",
-        "description": "Search the course knowledge base for material relevant to the question.",
+        "description": (
+            "Search the exchange help-center knowledge base for articles relevant to the "
+            "question."
+        ),
         "parameters": {
             "type": "object",
             "properties": {"query": {"type": "string", "description": "Focused search query"}},
