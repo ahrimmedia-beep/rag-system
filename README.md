@@ -40,6 +40,14 @@ curl -X POST localhost:8000/ask -H 'content-type: application/json' \
   -d '{"session_id":"s1","question":"how do I withdraw usdt?"}'
 ```
 
+## Screenshots
+
+The auto-generated Swagger UI at `/docs`.
+
+![Swagger UI listing the health, ingest, and ask endpoints](docs/screenshots/swagger-overview.png)
+*The three endpoints: health check, document ingest, and ask.*
+
+
 ## Develop
 
 ```bash
